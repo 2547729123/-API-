@@ -125,6 +125,4 @@ MIT License
 your.email@example.com
 ```
 
----
-
-你可以直接复制上面 Markdown 内容到你的 `README.md` 文件里，效果整洁清晰，适合 GitHub 首页展示。如果需要，我还可以帮你写更详细的文档或添加示例截图说明！
+--
