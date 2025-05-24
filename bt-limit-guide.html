@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>宝塔面板访问限制设置教程</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      background-color: #f7f7f7;
+      color: #333;
+      padding: 40px;
+      max-width: 860px;
+      margin: auto;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    h1 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 10px;
+    }
+    code {
+      background-color: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #c7254e;
+    }
+    pre {
+      background-color: #f0f0f0;
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    .note {
+      background-color: #dff0d8;
+      border-left: 5px solid #3c763d;
+      padding: 10px 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .folder-tree {
+      font-family: monospace;
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 5px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <h1>✅ 宝塔面板访问限制设置教程</h1>
+
+  <h2>方式一：对 <code>index.html</code> 和 <code>upload.php</code> 设置访问密码</h2>
+
+  <ol>
+    <li>打开 <strong>宝塔面板</strong>，进入「网站」页面。</li>
+    <li>选择你想要设置的站点，点击进入。</li>
+    <li>找到「<strong>目录保护</strong>」功能。</li>
+    <li>添加需要限制访问的路径：
+      <ul>
+        <li><code>/index.html</code></li>
+        <li><code>/upload.php</code></li>
+      </ul>
+    </li>
+    <li>为这两个路径设置账号和密码。</li>
+  </ol>
+
+  <div class="note">
+    这样设置后，只有输入正确的账号密码才能访问上传页面和上传接口，<code>rand-music.php</code> 和 <code>/music/</code> 等功能则不受影响。
+  </div>
+
+  <hr />
+
+  <h2>方式二：更安全推荐（仅上传路径验证）</h2>
+
+  <p>如果你更注重安全性，推荐将上传相关文件移动到一个新目录：</p>
+
+  <ol>
+    <li>创建一个新目录，例如：<code>/admin/</code></li>
+    <li>将 <code>index.html</code> 和 <code>upload.php</code> 移动到 <code>/admin/</code> 目录中。</li>
+    <li>在宝塔面板中对 <code>/admin/</code> 设置目录访问限制。</li>
+  </ol>
+
+  <p>修改后，站点结构如下：</p>
+  <div class="folder-tree">
+你的域名/<br>
+├── admin/<br>
+│&nbsp;&nbsp;&nbsp;&nbsp;├── index.html       ← 上传页面<br>
+│&nbsp;&nbsp;&nbsp;&nbsp;└── upload.php       ← 上传逻辑<br>
+├── rand-music.php       ← API接口（无需限制）<br>
+├── music/<br>
+└── music-list.json<br>
+  </div>
+
+  <div class="note">
+    推荐此结构用于长期部署，不仅安全性更高，而且结构更清晰。
+  </div>
+
+  <hr />
+
+  <h2>🔐 小结</h2>
+  <p>如果你希望：</p>
+  <ul>
+    <li>✅ <strong>只保护上传功能</strong>（防止滥用）；</li>
+    <li>✅ <strong>API 接口畅通无阻</strong>（如 <code>rand-music.php</code> 可供用户访问）；</li>
+  </ul>
+  <p>那么强烈建议你：</p>
+  <ul>
+    <li>限制 <code>/index.html</code> 和 <code>upload.php</code> 的访问，</li>
+    <li>或者将上传相关功能放入 <code>/admin/</code> 目录并整体限制。</li>
+  </ul>
+
+  <p>这样的设置结构清晰、安全性高，同时不会影响前端或外部平台正常调用 API 接口。</p>
+</body>
+</html>
